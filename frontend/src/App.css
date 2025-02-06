@@ -1,0 +1,25 @@
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  h1 {
+    color: rgb(103, 204, 64);
+    font-size: 4rem;
+  }
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  table {
+    align-items: center;
+    
+    tr {
+      display: flex;
+      justify-content: space-between;
+      gap: 2.5rem;
+    }
+  }
+}
