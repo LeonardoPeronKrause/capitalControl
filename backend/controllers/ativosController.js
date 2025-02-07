@@ -1,5 +1,6 @@
 // Importa o db
 const db = require('../models/ativoModels');
+const { obterCotacao } = require('./services/apiAlpha');
 
 // Função para criar um novo ativo
 const criarAtivo = (req, res) => {
@@ -75,8 +76,24 @@ const deletarAtivo = (req, res) => {
             return res.status(404).json({ message: 'Ativo não encontrado'})
         }
 
-        return res.status(404).josn({ message: 'Ativo deletado com sucesso!'});
+        return res.status(404).json({ message: 'Ativo deletado com sucesso!'});
     });
 };
 
-module.exports = { criarAtivo, listarAtivos, atualizarAtivo, deletarAtivo };
+// Função de cotação em tempo real
+const mostrarCotacaoAtivo = async (req, res) => {
+    const ticker = req.params.ticker;  // Obtém o ticker da URL da requisição
+    
+    try {
+      const cotacao = await obterCotacao(ticker);
+      if (cotacao) {
+        res.json({ ticker, cotacao });
+      } else {
+        res.status(404).json({ message: 'Cotação não encontrada' });
+      }
+    } catch (error) {
+      res.status(500).json({ message: 'Erro ao buscar cotação' });
+    }
+};
+
+module.exports = { criarAtivo, listarAtivos, atualizarAtivo, deletarAtivo, mostrarCotacaoAtivo };
