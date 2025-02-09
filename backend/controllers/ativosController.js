@@ -12,6 +12,7 @@ const criarAtivo = (req, res) => {
 
     const query = `INSERT INTO ativos (nome, ticker, cotas, preco_medio, preco_atual)
                     VALUES (?, ?, ?, ?, ?)`;
+    const values = [ nome, ticker, cotas, preco_medio, preco_atual ];
 
     db.query(query, [nome, ticker, cotas, preco_medio, preco_atual], (err, result) => {
         if (err) {
@@ -31,7 +32,7 @@ const listarAtivos = (req, res) => {
             console.error('Erro ao buscar ativos:', err);
             return res.status(500).json({ message: 'Erro ao buscar ativos.' });
         }
-        res.status(200).json(results);
+        res.status(200).json(results.rows || results);
     });
 };
 

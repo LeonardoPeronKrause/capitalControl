@@ -1,5 +1,6 @@
 // Importa o express para criar rotas
 const express = require('express');
+const db = require('../models/ativoModels');
 
 // Importa as funções do controlador (lógica CRUD)
 const { criarAtivo, listarAtivos, atualizarAtivo, deletarAtivo, mostrarCotacaoAtivo } = require('../controllers/ativosController');
@@ -7,10 +8,10 @@ const { criarAtivo, listarAtivos, atualizarAtivo, deletarAtivo, mostrarCotacaoAt
 const router = express.Router(); // Cria um objeto de rotas
 
 // Rota p add um novo ativo (POST)
-router.post('/', criarAtivo);
+router.post('/api/ativos', criarAtivo);
 
 // Rota p listar todos os ativos (GET)
-router.get('/', listarAtivos);
+router.get('/api/ativos', listarAtivos);
 
 // Rota p atualizar um ativo (PUT)
 router.put('/:id', atualizarAtivo);
