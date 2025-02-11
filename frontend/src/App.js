@@ -53,7 +53,56 @@ function App() {
     <h1>Capital Control</h1>
     <p>O seu sistema de gerenciamento de investimentos!</p>
 
-    <table border='1'>
+    {/* Formulário para adicionar novo ativo */}
+    <h2>Adicionar Novo Ativo</h2>
+    <form onSubmit={handleSubmit}>
+      <input
+        type='text'
+        name='nome'
+        placeholder='Nome do Ativo'
+        value={novoAtivo.nome}
+        onChange={handleInputChange}
+        required
+      />
+      <input
+        type='text'
+        name='ticker'
+        placeholder='Ticker'
+        value={novoAtivo.ticker}
+        onChange={handleInputChange}
+        required
+      />
+      <input
+        type='number'
+        name='cotas'
+        placeholder='Número de Cotas'
+        value={novoAtivo.cotas}
+        onChange={handleInputChange}
+        required
+      />
+      <input
+        type='number'
+        step='0.01'
+        name='precoMedio'
+        placeholder='Preço Médio'
+        value={novoAtivo.precoMedio}
+        onChange={handleInputChange}
+        required
+      />
+      <input
+        type='number'
+        step='0.01'
+        name='precoAtual'
+        placeholder='Preço Atual'
+        value={novoAtivo.precoAtual}
+        onChange={handleInputChange}
+        required
+      />
+      <button type='submit'>Adicionar Ativos</button>
+    </form>
+    {/* Tabela de ativos */}
+    <h2>Lista de Ativos</h2>
+    <table>
       <thead>
         <tr>
           <th>Ativo</th>
