@@ -32,16 +32,30 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Certificar que os dados sao numéricos
+    const ativoData = {
+      nome: novoAtivo.nome,
+      ticker: novoAtivo.ticker,
+      cotas: parseInt(novoAtivo.cotas), // Garantir que seja um número inteiro
+      precoMedio: parseFloat(novoAtivo.precoMedio), // Garantir que seja um número decimal
+      precoAtual: parseFloat(novoAtivo.precoAtual) // Garantir que seja um número decimal
+    };
+
     fetch('http://localhost:5000/api/ativos', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(novoAtivo),
+      body: JSON.stringify(ativoData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Erro ao adicionar ativo.');
+        }
+        return response.json()
+      })
       .then((data) => {
-        setAtivos([...ativos, {...novoAtivo, id: data.id}]);
+        setAtivos([...ativos, {...ativoData, id: data.id}]);
         setNovoAtivo({ nome: '', ticker: '', cotas: '', precoMedio: '', precoAtual: ''});
         alert('Ativo adicionado com sucesso!');
       })
@@ -116,18 +130,21 @@ function App() {
         </tr>
       </thead>
       <tbody>
-          {ativos.map((ativo, index) => (
-            <tr key={index}>
-              <td>{ativo.id}</td>
+          {ativos && ativos.length > 0 ? (
+            ativos.map((ativo) => (
+            <tr key={ativo.id}>
               <td>{ativo.nome}</td>
               <td>{ativo.ticker}</td>
               <td>{ativo.cotas}</td>
-              <td>R$ {ativo.precoMedio.toFixed(2)}</td>
-              <td>R$ {ativo.precoAtual.toFixed(2)}</td>
-              <td>R$ {(ativo.cotas * ativo.precoMedio).toFixed(2)}</td>
-              <td>R$ {(ativo.cotas * ativo.precoAtual).toFixed(2)}</td>
+              <td>R$ {(ativo.precoMedio && !isNaN(ativo.precoMedio) ? ativo.precoMedio.toFixed(2) : '0.00')}</td>
+              <td>R$ {(ativo.precoAtual && !isNaN(ativo.precoAtual) ? ativo.precoAtual.toFixed(2) : '0.00')}</td>
+              <td>R$ {(ativo.cotas * (ativo.precoMedio || 0)).toFixed(2)}</td>
+              <td>R$ {(ativo.cotas * (ativo.precoAtual || 0)).toFixed(2)}</td>
             </tr>
-          ))}
+          ))
+        ) : (
+          <tr><td colSpan='5'>Nenhum ativo encontrado.</td></tr>
+        )}
       </tbody>
     </table>
    </div> 

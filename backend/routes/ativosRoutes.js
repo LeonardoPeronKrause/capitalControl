@@ -8,10 +8,10 @@ const { criarAtivo, listarAtivos, atualizarAtivo, deletarAtivo, mostrarCotacaoAt
 const router = express.Router(); // Cria um objeto de rotas
 
 // Rota p add um novo ativo (POST)
-router.post('/api/ativos', criarAtivo);
+router.post('/ativos', criarAtivo);
 
 // Rota p listar todos os ativos (GET)
-router.get('/api/ativos', listarAtivos);
+router.get('/ativos', listarAtivos);
 
 // Rota p atualizar um ativo (PUT)
 router.put('/:id', atualizarAtivo);

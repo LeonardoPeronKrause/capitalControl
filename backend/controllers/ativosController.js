@@ -32,7 +32,7 @@ const listarAtivos = (req, res) => {
             console.error('Erro ao buscar ativos:', err);
             return res.status(500).json({ message: 'Erro ao buscar ativos.' });
         }
-        res.status(200).json(results.rows || results);
+        res.status(200).json(results);
     });
 };
 
