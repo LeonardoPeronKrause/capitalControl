@@ -119,7 +119,6 @@ function App() {
     <table>
       <thead>
         <tr>
-          <th>Ativo</th>
           <th>Nome</th>
           <th>Ticker</th>
           <th>Cotas</th>
@@ -133,8 +132,8 @@ function App() {
           {ativos && ativos.length > 0 ? (
             ativos.map((ativo) => (
             <tr key={ativo.id}>
-              <td>{ativo.nome}</td>
-              <td>{ativo.ticker}</td>
+              <td>{ativo.nome.toUpperCase()}</td>
+              <td>{ativo.ticker.toUpperCase()}</td>
               <td>{ativo.cotas}</td>
               <td>R$ {(ativo.precoMedio && !isNaN(ativo.precoMedio) ? ativo.precoMedio.toFixed(2) : '0.00')}</td>
               <td>R$ {(ativo.precoAtual && !isNaN(ativo.precoAtual) ? ativo.precoAtual.toFixed(2) : '0.00')}</td>
