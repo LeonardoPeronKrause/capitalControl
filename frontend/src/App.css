@@ -59,6 +59,13 @@ button:hover {
 
 /* Tabela */
 
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+  }
+
 table {
   width: 100%;
   border-collapse: collapse;
