@@ -1,1 +1,3 @@
-Projeto de Gerenciador de Investimentos
+Investment Manager Project
+
+**DEVELOPING**
